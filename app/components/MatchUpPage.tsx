@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Button, CategoryButton, EventCard, Card, Badge, MatchUpIcons } from "./MatchUpComponents";
-import { Section, Grid, Flex } from "./LayoutComponents";
+import { CategoryButton, EventCard, Badge, MatchUpIcons } from "./MatchUpComponents";
+import { Section } from "./LayoutComponents";
 
 type MatchUpPageProps = {
   setActiveTab: (tab: string) => void;
@@ -97,7 +97,7 @@ const EventsList = ({
   );
 };
 
-export function MatchUpPage({ setActiveTab }: MatchUpPageProps) {
+export function MatchUpPage({ setActiveTab: _ }: MatchUpPageProps) {
   const [activeCategory, setActiveCategory] = useState("crypto");
 
   const handleCategoryChange = (category: string) => {

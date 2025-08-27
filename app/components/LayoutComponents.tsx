@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode, forwardRef } from "react";
-import { NavigationItem, MatchUpIcons } from "./MatchUpComponents";
+import { NavigationItem } from "./MatchUpComponents";
 
 // Reusable Header Component
 type HeaderProps = {
