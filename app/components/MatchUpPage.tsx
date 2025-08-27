@@ -4,10 +4,6 @@ import { useState, useMemo } from "react";
 import { CategoryButton, EventCard, Badge, MatchUpIcons } from "./MatchUpComponents";
 import { Section } from "./LayoutComponents";
 
-type MatchUpPageProps = {
-  setActiveTab: (tab: string) => void;
-};
-
 // Reusable Category Selection Component
 const CategorySelection = ({ 
   activeCategory, 
@@ -97,7 +93,7 @@ const EventsList = ({
   );
 };
 
-export function MatchUpPage({ setActiveTab: _ }: MatchUpPageProps) {
+export function MatchUpPage() {
   const [activeCategory, setActiveCategory] = useState("crypto");
 
   const handleCategoryChange = (category: string) => {
