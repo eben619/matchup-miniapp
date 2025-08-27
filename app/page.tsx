@@ -96,7 +96,7 @@ export default function App() {
   const TabContent = () => {
     switch (activeTab) {
       case "home":
-        return <MatchUpPage setActiveTab={setActiveTab} />;
+        return <MatchUpPage />;
       case "mybets":
         return (
           <div className="text-center py-8">
@@ -119,7 +119,7 @@ export default function App() {
           </div>
         );
       default:
-        return <MatchUpPage setActiveTab={setActiveTab} />;
+        return <MatchUpPage />;
     }
   };
 
