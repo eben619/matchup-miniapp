@@ -1,112 +1,115 @@
-# MiniKit Template
+# Match-Up 🎯
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-onchain --mini`](), configured with:
+A Web3 prediction market mini-app built as a Farcaster Frame. Users can participate in prediction markets for sports, crypto, and custom events.
 
-- [MiniKit](https://docs.base.org/builderkits/minikit/overview)
-- [OnchainKit](https://www.base.org/builders/onchainkit)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Next.js](https://nextjs.org/docs)
+**🌐 Live App**: [https://matchup-miniapp.vercel.app/](https://matchup-miniapp.vercel.app/)
+
+## Tech Stack
+
+- [MiniKit](https://docs.base.org/builderkits/minikit/overview) - Farcaster Frame integration
+- [OnchainKit](https://www.base.org/builders/onchainkit) - Web3 components
+- [Base Network](https://base.org) - Coinbase's L2 blockchain
+- [Next.js](https://nextjs.org/docs) - React framework
+- [Tailwind CSS](https://tailwindcss.com) - Styling
 
 ## Getting Started
 
-1. Install dependencies:
+1. **Clone the repository**:
+
+```bash
+git clone <repository-url>
+cd matchup-miniapp
+```
+
+2. **Install dependencies**:
+
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
-# or
-bun install
 ```
 
-2. Verify environment variables, these will be set up by the `npx create-onchain --mini` command:
+3. **Start the development server**:
 
-You can regenerate the FARCASTER Account Association environment variables by running `npx create-onchain --manifest` in your project directory.
-
-The environment variables enable the following features:
-
-- Frame metadata - Sets up the Frame Embed that will be shown when you cast your frame
-- Account association - Allows users to add your frame to their account, enables notifications
-- Redis API keys - Enable Webhooks and background notifications for your application by storing users notification details
-
-```bash
-# Shared/OnchainKit variables
-NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME=
-NEXT_PUBLIC_URL=
-NEXT_PUBLIC_ICON_URL=
-NEXT_PUBLIC_ONCHAINKIT_API_KEY=
-
-# Frame metadata
-FARCASTER_HEADER=
-FARCASTER_PAYLOAD=
-FARCASTER_SIGNATURE=
-NEXT_PUBLIC_APP_ICON=
-NEXT_PUBLIC_APP_SUBTITLE=
-NEXT_PUBLIC_APP_DESCRIPTION=
-NEXT_PUBLIC_APP_SPLASH_IMAGE=
-NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR=
-NEXT_PUBLIC_APP_PRIMARY_CATEGORY=
-NEXT_PUBLIC_APP_HERO_IMAGE=
-NEXT_PUBLIC_APP_TAGLINE=
-NEXT_PUBLIC_APP_OG_TITLE=
-NEXT_PUBLIC_APP_OG_DESCRIPTION=
-NEXT_PUBLIC_APP_OG_IMAGE=
-
-# Redis config
-REDIS_URL=
-REDIS_TOKEN=
-```
-
-3. Start the development server:
 ```bash
 npm run dev
 ```
 
-## Template Features
+4. **Open your browser** to `http://localhost:3000`
 
-### Frame Configuration
-- `.well-known/farcaster.json` endpoint configured for Frame metadata and account association
-- Frame metadata automatically added to page headers in `layout.tsx`
+### Environment Variables (Optional)
 
-### Background Notifications
-- Redis-backed notification system using Upstash
-- Ready-to-use notification endpoints in `api/notify` and `api/webhook`
-- Notification client utilities in `lib/notification-client.ts`
+For full functionality (Farcaster Frame features, notifications), create a `.env.local` file:
 
-### Theming
-- Custom theme defined in `theme.css` with OnchainKit variables
-- Pixel font integration with Pixelify Sans
-- Dark/light mode support through OnchainKit
+```bash
+# Required for Web3 features
+NEXT_PUBLIC_ONCHAINKIT_API_KEY=your_api_key
+NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME=Match-Up
 
-### MiniKit Provider
-The app is wrapped with `MiniKitProvider` in `providers.tsx`, configured with:
-- OnchainKit integration
-- Access to Frames context
-- Sets up Wagmi Connectors
-- Sets up Frame SDK listeners
-- Applies Safe Area Insets
+# Optional: For Farcaster Frame integration
+FARCASTER_HEADER=
+FARCASTER_PAYLOAD=
+FARCASTER_SIGNATURE=
 
-## Customization
+# Optional: For notifications
+REDIS_URL=
+REDIS_TOKEN=
+```
 
-To get started building your own frame, follow these steps:
+**Note**: The app works without environment variables for local development and UI testing.
 
-1. Remove the DemoComponents:
-   - Delete `components/DemoComponents.tsx`
-   - Remove demo-related imports from `page.tsx`
+## Features
 
-2. Start building your Frame:
-   - Modify `page.tsx` to create your Frame UI
-   - Update theme variables in `theme.css`
-   - Adjust MiniKit configuration in `providers.tsx`
+### 🎲 Prediction Markets
 
-3. Add your frame to your account:
-   - Cast your frame to see it in action
-   - Share your frame with others to start building your community
+- **Sports**: NBA, NFL, and other sports predictions
+- **Crypto**: Bitcoin, Ethereum price predictions
+- **Custom**: Community-created prediction events
 
-## Learn More
+### 💰 Web3 Integration
 
-- [MiniKit Documentation](https://docs.base.org/builderkits/minikit/overview)
-- [OnchainKit Documentation](https://docs.base.org/builderkits/onchainkit/getting-started)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- Wallet connection via OnchainKit
+- Base network support
+- ENS name and avatar display
+- ETH balance tracking
+
+### 📱 Mobile-First Design
+
+- Responsive Farcaster Frame
+- Bottom navigation tabs
+- Reusable UI components
+- Clean, modern interface
+
+### 🔔 Notifications
+
+- Redis-backed notification system
+- Webhook support for real-time updates
+- Frame save/add functionality
+
+## App Structure
+
+### Navigation Tabs
+
+- **Home**: Browse active prediction events
+- **My Bets**: View your active predictions
+- **Pools**: Explore prediction pools
+- **Profile**: Manage your account
+
+### Components
+
+- `MatchUpPage.tsx` - Main prediction events interface
+- `MatchUpComponents.tsx` - Reusable UI components
+- `LayoutComponents.tsx` - Navigation and layout
+
+### Development
+
+- Add new prediction categories in `MatchUpPage.tsx`
+- Customize UI components in `MatchUpComponents.tsx`
+- Update theme in `theme.css`
+
+## Local Development
+
+The app runs locally without any setup beyond `npm install` and `npm run dev`. You can:
+
+- Browse prediction events
+- Test navigation between tabs
+- View UI components and styling
+- Test wallet connection UI (requires OnchainKit API key for full functionality)
