@@ -161,7 +161,6 @@ export function CreateMarketForm({ onSubmit, onCancel }: CreateMarketFormProps) 
       description: "",
       endDate: "",
       marketType: "binary",
-      betAmountUSDC: "",
       betAmountETH: "",
       settlementSource: ""
     });
