@@ -1,5 +1,7 @@
 # Match-Up 🎯
 
+![Match-Up](public/matchuparean.png)
+
 A Web3 prediction market mini-app built as a Farcaster Frame. Users can participate in prediction markets for sports, crypto, and custom events.
 
 **🌐 Live App**: [https://matchup-miniapp.vercel.app/](https://matchup-miniapp.vercel.app/)
