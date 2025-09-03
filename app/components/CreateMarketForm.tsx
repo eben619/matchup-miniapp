@@ -136,15 +136,18 @@ export function CreateMarketForm({ onSubmit, onCancel }: CreateMarketFormProps) 
       console.error("Error creating market:", err);
       console.error("Full error details:", err);
       
+      // Type-safe error handling
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      
       // More specific error handling
-      if (err.message?.includes("Transaction does not have a transaction hash")) {
+      if (errorMessage.includes("Transaction does not have a transaction hash")) {
         alert("Transaction failed - please check your network connection and ensure you're on Base mainnet. Try refreshing the page and connecting your wallet again.");
-      } else if (err.message?.includes("User rejected")) {
+      } else if (errorMessage.includes("User rejected")) {
         alert("Transaction was cancelled by user");
-      } else if (err.message?.includes("insufficient funds")) {
+      } else if (errorMessage.includes("insufficient funds")) {
         alert("Insufficient funds for transaction");
       } else {
-        alert(`Failed to create market: ${err.message || "Unknown error"}`);
+        alert(`Failed to create market: ${errorMessage || "Unknown error"}`);
       }
     }
   };
