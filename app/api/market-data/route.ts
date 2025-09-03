@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createPublicClient, http } from 'viem';
 import { base } from 'viem/chains';
-import { PREDICTION_MARKET_CONTRACT } from '../../../lib/contract';
+import { MARKET_FACTORY_CONTRACT } from '../../../lib/contract';
 
 // Create a public client for reading from the blockchain
 const publicClient = createPublicClient({
@@ -18,45 +18,36 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch market data from the contract
-    const [marketData, marketStats, marketBets] = await Promise.all([
-      publicClient.readContract({
-        address: PREDICTION_MARKET_CONTRACT.address,
-        abi: PREDICTION_MARKET_CONTRACT.abi,
-        functionName: 'getMarket',
-        args: [BigInt(marketId)]
-      }),
-      publicClient.readContract({
-        address: PREDICTION_MARKET_CONTRACT.address,
-        abi: PREDICTION_MARKET_CONTRACT.abi,
-        functionName: 'getMarketStats',
-        args: [BigInt(marketId)]
-      }),
-      publicClient.readContract({
-        address: PREDICTION_MARKET_CONTRACT.address,
-        abi: PREDICTION_MARKET_CONTRACT.abi,
-        functionName: 'getMarketBets',
-        args: [BigInt(marketId)]
-      })
-    ]);
+    const marketResult = await publicClient.readContract({
+      address: MARKET_FACTORY_CONTRACT.address,
+      abi: MARKET_FACTORY_CONTRACT.abi,
+      functionName: 'getMarket',
+      args: [BigInt(marketId)]
+    });
+
+    // The new contract returns both market and stats in one call
+    const [marketData, marketStats] = marketResult;
 
     // Transform the data to a more usable format
     const result = {
-      id: marketData[0],
-      title: marketData[1],
-      description: marketData[2],
-      category: marketData[3],
-      betAmountUSDC: marketData[4],
-      betAmountETH: marketData[5],
-      endTime: marketData[6],
-      isResolved: marketData[7],
-      settlementSource: marketStats[0],
-      creator: marketStats[1],
-      totalPredictions: marketStats[2],
-      totalPoolUSDC: marketStats[3],
-      totalPoolETH: marketStats[4],
-      winningOutcome: marketStats[5],
-      yesBets: marketBets[0],
-      noBets: marketBets[1]
+      id: marketData.id,
+      title: marketData.title,
+      description: marketData.description,
+      category: marketData.category,
+      betAmountETH: marketData.betAmountETH,
+      endTime: marketData.endTime,
+      isResolved: marketData.isResolved,
+      settlementSource: marketData.settlementSource,
+      creator: marketData.creator,
+      createdAt: marketData.createdAt,
+      winningOutcome: marketData.winningOutcome,
+      isActive: marketData.isActive,
+      tags: marketData.tags,
+      totalPredictions: marketStats.totalPredictions,
+      totalPoolETH: marketStats.totalPoolETH,
+      yesBets: marketStats.yesBets,
+      noBets: marketStats.noBets,
+      uniquePredictors: marketStats.uniquePredictors
     };
 
     return NextResponse.json(result);
