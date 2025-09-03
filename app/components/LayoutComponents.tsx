@@ -21,7 +21,7 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(({
   return (
     <header
       ref={ref}
-      className={`flex justify-between items-center mb-4 h-12 ${className}`}
+      className={`flex justify-between items-center h-12 px-4 py-3 border-b border-gray-200 bg-white ${className}`}
       {...props}
     >
       <div className="flex items-center space-x-2">
@@ -66,7 +66,7 @@ export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>((
   return (
     <footer
       ref={ref}
-      className={`mt-auto pt-4 border-t border-gray-200 ${className}`}
+      className={`pt-4 pb-2 border-t border-gray-200 bg-white ${className}`}
       {...props}
     >
       <div className="flex justify-around">
