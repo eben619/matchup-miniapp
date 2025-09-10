@@ -1,6 +1,6 @@
 # Match-Up 🎯
 
-![Match-Up](public/matchuparean.png)
+![Match-Up](public/matchuparnalogo.png)
 
 A Web3 prediction market mini-app built as a Farcaster Frame. Users can participate in prediction markets for sports, crypto, and custom events.
 
